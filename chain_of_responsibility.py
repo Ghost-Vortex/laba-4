@@ -1,23 +1,24 @@
 class Handler:
-    def __init__(self, successor=None):
-        self.successor = successor
+    def __init__(self, next_handler=None):
+        self.next_handler = next_handler
 
     def handle(self, request):
-        if self.successor:
-            return self.successor.handle(request)
+        if self.next_handler:
+            return self.next_handler.handle(request)
 
-class NumberHandler(Handler):
+class Level1(Handler):
     def handle(self, request):
-        if request < 10:
-            return f"Handled {request} by NumberHandler"
+        if request == "simple":
+            print("Решено на 1 уровне")
         else:
-            return super().handle(request)
+            super().handle(request)
 
-class LargeNumberHandler(Handler):
+class Level2(Handler):
     def handle(self, request):
-        return f"Handled {request} by LargeNumberHandler"
+        if request == "hard":
+            print("Решено на 2 уровне")
+        else:
+            super().handle(request)
 
-if __name__ == "__main__":
-    handler_chain = NumberHandler(LargeNumberHandler())
-    print(handler_chain.handle(5))
-    print(handler_chain.handle(50))
+chain = Level1(Level2())
+chain.handle("hard")
