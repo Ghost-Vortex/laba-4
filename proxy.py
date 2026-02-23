@@ -1,25 +1,14 @@
-class RealImage:
-    def __init__(self, filename):
-        self.filename = filename
-        self.load_image()
+class RealService:
+    def request(self):
+        print("Настоящий сервис работает")
 
-    def load_image(self):
-        print(f"Loading {self.filename}")
+class Proxy:
+    def __init__(self):
+        self.real_service = RealService()
 
-    def display(self):
-        print(f"Displaying {self.filename}")
+    def request(self):
+        print("Проверка доступа...")
+        self.real_service.request()
 
-class ProxyImage:
-    def __init__(self, filename):
-        self.filename = filename
-        self.real_image = None
-
-    def display(self):
-        if not self.real_image:
-            self.real_image = RealImage(self.filename)
-        self.real_image.display()
-
-if __name__ == "__main__":
-    img = ProxyImage("photo.jpg")
-    img.display()
-    img.display()
+proxy = Proxy()
+proxy.request()
