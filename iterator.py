@@ -1,11 +1,11 @@
 class MyCollection:
-    def __init__(self, items):
-        self.items = items
+    def __init__(self):
+        self.data = [1, 2, 3]
 
     def __iter__(self):
-        return iter(self.items)
+        return iter(self.data)
 
-if __name__ == "__main__":
-    collection = MyCollection([1, 2, 3])
-    for item in collection:
-        print(item)
+collection = MyCollection()
+
+for item in collection:
+    print(item)
