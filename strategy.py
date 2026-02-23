@@ -1,25 +1,21 @@
-class PaymentStrategy:
+class PayByCard:
     def pay(self, amount):
-        pass
+        print(f"Оплата {amount} картой")
 
-class CreditCardPayment(PaymentStrategy):
+class PayByCash:
     def pay(self, amount):
-        return f"Paid {amount} using credit card"
+        print(f"Оплата {amount} наличными")
 
-class PayPalPayment(PaymentStrategy):
-    def pay(self, amount):
-        return f"Paid {amount} using PayPal"
-
-class PaymentContext:
-    def __init__(self, strategy: PaymentStrategy):
+class Payment:
+    def __init__(self, strategy):
         self.strategy = strategy
 
-    def pay(self, amount):
-        return self.strategy.pay(amount)
+    def checkout(self, amount):
+        self.strategy.pay(amount)
 
-if __name__ == "__main__":
-    context = PaymentContext(CreditCardPayment())
-    print(context.pay(100))
+# Использование
+payment = Payment(PayByCard())
+payment.checkout(100)
 
-    context.strategy = PayPalPayment()
-    print(context.pay(200))
+payment = Payment(PayByCash())
+payment.checkout(200)
