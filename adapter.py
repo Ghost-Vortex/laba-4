@@ -1,16 +1,15 @@
-class EuropeanSocket:
-    def voltage(self):
-        return 230
+class OldSystem:
+    def old_method(self):
+        return "Старый метод"
 
-class USASocket:
-    def voltage(self):
-        return 120
+class Adapter:
+    def __init__(self, old_system):
+        self.old_system = old_system
 
-class Adapter(EuropeanSocket):
-    def voltage(self):
-        return 120
-if __name__ == "__main__":
-    euro = EuropeanSocket()
-    usa = Adapter()
-    print(euro.voltage())
-    print(usa.voltage())
+    def new_method(self):
+        return self.old_system.old_method()
+
+old = OldSystem()
+adapter = Adapter(old)
+
+print(adapter.new_method())
